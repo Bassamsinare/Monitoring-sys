@@ -1,0 +1,338 @@
+====================================================================
+TESTING CHECKLIST - Smart Home Load Monitor
+====================================================================
+
+Use this checklist to verify all features work correctly before
+your presentation tomorrow.
+
+====================================================================
+PRE-FLIGHT CHECKS
+====================================================================
+
+□ Java 21 is installed (java -version)
+□ JavaFX SDK is downloaded and extracted
+□ JAVAFX_PATH is set correctly in compile and run scripts
+□ Project compiles without errors (compile.bat or compile.sh)
+□ Application launches successfully (run.bat or run.sh)
+
+====================================================================
+SCENARIO 1: NORMAL OPERATION
+====================================================================
+
+Test Steps:
+1. Start application
+2. Click "Start Monitoring"
+3. Observe for 10 seconds
+
+Expected Results:
+□ All appliance currents update every 2 seconds
+□ Total current is displayed and updates
+□ Total power is calculated (Voltage × Current)
+□ Whole house status shows "OK" (green)
+□ Socket groups show reasonable currents
+□ No danger alerts appear
+□ Energy and cost accumulate slowly
+
+Pass: □ Yes □ No
+Notes: ___________________________________________________________
+
+====================================================================
+SCENARIO 2: SOCKET GROUP OVERLOAD (13A)
+====================================================================
+
+Test Steps:
+1. Set Simulation Mode to "Scripted" in Settings
+2. Start monitoring
+3. Wait for step 5-9 (Kitchen overload)
+
+Expected Results:
+□ Kitchen-1 socket group total exceeds 13A
+□ Kitchen-1 status changes to "DANGER" (red)
+□ Alert appears: "Kitchen-1 socket group overloaded. Reduce load."
+□ Highest current appliance in Kitchen-1 is highlighted red
+□ Alert has timestamp
+□ Other socket groups remain OK
+
+Pass: □ Yes □ No
+Notes: ___________________________________________________________
+
+====================================================================
+SCENARIO 3: WARNING BEFORE OVERLOAD (10-13A)
+====================================================================
+
+Test Steps:
+1. Continue scripted simulation
+2. Wait for step 10-14 (Warning state)
+
+Expected Results:
+□ A socket group current enters 10-13A range
+□ Socket group status shows "WARNING" (yellow)
+□ Alert appears: "High load on [group]. Avoid adding another high power appliance."
+□ Alert is distinguishable from danger alerts
+□ Group does not show as DANGER
+
+Pass: □ Yes □ No
+Notes: ___________________________________________________________
+
+====================================================================
+SCENARIO 4: WHOLE HOUSE LIMIT EXCEEDED
+====================================================================
+
+Test Steps:
+1. Continue scripted simulation
+2. Wait for step 15-19 (Whole house overload)
+
+Expected Results:
+□ Total current exceeds Main Limit (default 40A)
+□ Whole house status changes to "DANGER" (red background)
+□ Alert appears: "Total load exceeded main limit."
+□ "Load Reduction Recommendations" tab populates
+□ Recommendations list non-essential appliances
+□ Recommendations sorted by highest current first
+□ Recommendations include appliance name, current, and location
+
+Pass: □ Yes □ No
+Notes: ___________________________________________________________
+
+====================================================================
+SCENARIO 5: SURGE EVENT
+====================================================================
+
+Test Steps:
+1. Continue scripted simulation
+2. Wait for step 20-24 (Surge on AC)
+
+Expected Results:
+□ AC current increases suddenly (≥3A jump)
+□ AC status changes to "SURGE" (orange)
+□ Alert appears: "Surge detected on AC: +[X]A"
+□ Surge alert shows actual delta value
+□ Other appliances unaffected
+□ Status returns to normal after surge
+
+Pass: □ Yes □ No
+Notes: ___________________________________________________________
+
+====================================================================
+SCENARIO 6: INVALID SENSOR READING
+====================================================================
+
+Test Steps:
+1. Continue scripted simulation
+2. Wait for step 25-29 (Invalid reading on Microwave)
+
+Expected Results:
+□ Microwave shows invalid reading (negative or over max)
+□ Microwave status shows "INVALID" (gray)
+□ Alert appears: "Sensor fault on Microwave. Reading ignored."
+□ Invalid reading NOT included in socket group total
+□ Invalid reading NOT included in house total
+□ Other appliances continue normally
+
+Pass: □ Yes □ No
+Notes: ___________________________________________________________
+
+====================================================================
+SCENARIO 7: COST AND ENERGY TRACKING
+====================================================================
+
+Test Steps:
+1. Note initial energy and cost (should be 0)
+2. Run simulation for 1 minute
+3. Observe energy and cost values
+
+Expected Results:
+□ Session Energy (kWh) increases over time
+□ Session Cost (GHS) increases over time
+□ Cost = Energy × Tariff
+□ Values are reasonable (not negative or extremely high)
+□ Energy accumulates even during faults/surges
+
+Pass: □ Yes □ No
+Notes: ___________________________________________________________
+
+====================================================================
+SETTINGS FUNCTIONALITY
+====================================================================
+
+Test Steps:
+1. Click "Settings" button
+2. Modify each setting
+3. Click "Save"
+4. Verify changes take effect
+
+Expected Results:
+□ Settings dialog opens
+□ All fields are editable
+□ Voltage field accepts numeric input
+□ Main Limit field accepts numeric input
+□ Surge Threshold field accepts numeric input
+□ Tariff field accepts numeric input
+□ Simulation Mode dropdown works
+□ "Save" button applies changes
+□ "Cancel" button discards changes
+□ Invalid input shows error message
+
+Pass: □ Yes □ No
+Notes: ___________________________________________________________
+
+====================================================================
+USER INTERFACE CHECKS
+====================================================================
+
+□ Application title is displayed
+□ "Start Monitoring" button works
+□ "Stop" button works and is disabled initially
+□ "Settings" button opens settings dialog
+□ Appliance table displays all columns correctly
+□ Socket groups panel shows all groups
+□ Summary panel updates in real-time
+□ Alerts list is scrollable
+□ Recommendations list is scrollable
+□ Status colors are distinct and clear
+□ All text is readable
+□ Window is properly sized
+□ No UI elements overlap
+
+Pass: □ Yes □ No
+Notes: ___________________________________________________________
+
+====================================================================
+RANDOM SIMULATION MODE
+====================================================================
+
+Test Steps:
+1. Set Simulation Mode to "Random"
+2. Start monitoring
+3. Observe for 2-3 minutes
+
+Expected Results:
+□ Appliance currents vary realistically
+□ Some appliances occasionally turn off (0A)
+□ Occasional surges occur
+□ Occasional invalid readings occur
+□ Overloads can occur randomly
+□ System handles all scenarios dynamically
+
+Pass: □ Yes □ No
+Notes: ___________________________________________________________
+
+====================================================================
+STOP/START FUNCTIONALITY
+====================================================================
+
+Test Steps:
+1. Start monitoring
+2. Let it run for 30 seconds
+3. Click "Stop"
+4. Wait 10 seconds
+5. Click "Start Monitoring" again
+
+Expected Results:
+□ Simulation stops when "Stop" clicked
+□ Values freeze (no updates)
+□ "Start Monitoring" button re-enables
+□ "Stop" button disables
+□ Session data is preserved
+□ Clicking "Start" resumes simulation
+□ Energy and cost continue accumulating
+
+Pass: □ Yes □ No
+Notes: ___________________________________________________________
+
+====================================================================
+EDGE CASES
+====================================================================
+
+Test: Multiple appliances at max current
+□ All appliances can reach maximum safely
+□ Proper overload detection occurs
+
+Test: All appliances off
+□ System shows 0A total
+□ Status remains OK
+□ No false alerts
+
+Test: Rapid start/stop
+□ No crashes or errors
+□ Data remains consistent
+
+Test: Very high main limit (100A)
+□ Overload alerts don't trigger prematurely
+□ System remains stable
+
+Test: Very low main limit (5A)
+□ Immediate overload detected
+□ Recommendations provided
+
+Test: Zero tariff
+□ Cost remains 0
+□ Energy still tracks correctly
+
+Pass: □ Yes □ No
+Notes: ___________________________________________________________
+
+====================================================================
+PERFORMANCE CHECKS
+====================================================================
+
+□ Application starts in under 5 seconds
+□ UI updates smoothly (no lag)
+□ No memory leaks during extended use
+□ Table scrolling is smooth
+□ No flickering or visual glitches
+□ Application closes properly
+□ No errors in console
+
+Pass: □ Yes □ No
+Notes: ___________________________________________________________
+
+====================================================================
+PRESENTATION REHEARSAL
+====================================================================
+
+□ Can explain the problem being solved
+□ Can demonstrate normal operation
+□ Can show socket overload scenario
+□ Can show whole house overload
+□ Can explain load shedding recommendations
+□ Can demonstrate settings changes
+□ Can show both simulation modes
+□ Can explain real-world applications
+□ Confident with all features
+□ Have backup plan if technical issues
+
+Pass: □ Yes □ No
+Notes: ___________________________________________________________
+
+====================================================================
+FINAL CHECKLIST
+====================================================================
+
+□ All scenarios tested and pass
+□ Application runs without errors
+□ UI is clear and professional
+□ All features demonstrated successfully
+□ Comfortable explaining the code
+□ Ready for questions about implementation
+□ Backup copy of project saved
+□ JavaFX SDK available on presentation computer
+
+====================================================================
+OVERALL READINESS
+====================================================================
+
+Total Scenarios Passing: _____ / 13
+
+Ready for Presentation: □ Yes □ No
+
+Confidence Level: □ Low □ Medium □ High
+
+Areas Needing Practice:
+___________________________________________________________
+___________________________________________________________
+___________________________________________________________
+
+====================================================================
+GOOD LUCK WITH YOUR PRESENTATION!
+====================================================================

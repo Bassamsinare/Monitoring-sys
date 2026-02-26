@@ -1,0 +1,305 @@
+====================================================================
+SMART HOME LOAD MONITOR - QUICK START GUIDE
+====================================================================
+
+Project: Smart Home Load Monitor for Ghanaian Homes
+Submission Deadline: Monday, 19 January 2026
+Technology: Java 21 + JavaFX
+Author: [Your Name]
+Date: 15 February 2026
+
+====================================================================
+PREREQUISITES
+====================================================================
+
+1. Java Development Kit (JDK) 21
+   Download: https://www.oracle.com/java/technologies/downloads/#java21
+   
+   Verify installation:
+   > java -version
+   Should show: java version "21.x.x"
+
+2. JavaFX SDK 21
+   Download: https://gluonhq.com/products/javafx/
+   Extract to: C:\javafx-sdk-21 (Windows) or /opt/javafx-sdk-21 (Linux/Mac)
+
+====================================================================
+SETUP INSTRUCTIONS
+====================================================================
+
+STEP 1: Download JavaFX
+------------------------
+1. Go to https://gluonhq.com/products/javafx/
+2. Download JavaFX SDK 21 for your operating system
+3. Extract the ZIP file to a permanent location
+4. Note the path to the 'lib' folder inside
+
+STEP 2: Configure Scripts
+--------------------------
+Open the compile and run scripts in a text editor:
+
+For Windows (compile.bat and run.bat):
+   Find this line: set JAVAFX_PATH=C:\javafx-sdk-21\lib
+   Change it to your actual JavaFX lib path
+
+For Linux/Mac (compile.sh and run.sh):
+   Find this line: JAVAFX_PATH="/opt/javafx-sdk-21/lib"
+   Change it to your actual JavaFX lib path
+
+STEP 3: Compile the Project
+----------------------------
+Windows:
+   > compile.bat
+
+Linux/Mac:
+   > chmod +x compile.sh
+   > ./compile.sh
+
+You should see: "Compilation successful!"
+
+STEP 4: Run the Application
+----------------------------
+Windows:
+   > run.bat
+
+Linux/Mac:
+   > chmod +x run.sh
+   > ./run.sh
+
+The application window should open.
+
+====================================================================
+USING THE APPLICATION
+====================================================================
+
+1. START MONITORING
+   - Click "Start Monitoring" button
+   - Simulation begins immediately
+   - Watch real-time current readings update every 2 seconds
+
+2. VIEW APPLIANCE STATUS
+   - Appliance table shows: name, location, socket group, current, priority, status
+   - Status colors:
+     * Green (OK) - Normal operation
+     * Yellow (WARNING) - High load
+     * Red (DANGER) - Overload
+     * Orange (SURGE) - Sudden current increase
+     * Gray (INVALID) - Sensor fault
+
+3. MONITOR SOCKET GROUPS
+   - Right panel shows each socket group total current
+   - Groups turn WARNING at 10-13A
+   - Groups turn DANGER above 13A
+
+4. CHECK WHOLE HOUSE STATUS
+   - System Summary shows total current and power
+   - Status badge indicates overall system health
+   - Session energy and cost are tracked automatically
+
+5. REVIEW ALERTS
+   - Bottom panel "Alerts" tab shows all warnings and dangers
+   - Timestamped for easy tracking
+   - Includes surge detections and sensor faults
+
+6. LOAD REDUCTION RECOMMENDATIONS
+   - When overloaded, check "Load Reduction Recommendations" tab
+   - System suggests which non-essential appliances to turn off
+   - Recommendations prioritize highest-current devices
+
+7. ADJUST SETTINGS
+   - Click "Settings" button
+   - Modify:
+     * Voltage (default: 230V)
+     * Main Limit (default: 40A)
+     * Surge Threshold (default: 3A)
+     * Tariff rate (default: GHS 1.50/kWh)
+     * Simulation Mode (Random or Scripted)
+
+8. SIMULATION MODES
+   
+   Random Mode:
+   - Realistic random variations
+   - Occasional surges (7% chance)
+   - Random sensor faults (3% chance)
+   - Good for general testing
+   
+   Scripted Mode:
+   - Predictable scenario sequence
+   - Demonstrates all 7 scenarios:
+     1. Normal operation
+     2. Socket group overload
+     3. Warning before overload
+     4. Whole house limit exceeded
+     5. Surge event
+     6. Invalid sensor reading
+     7. Return to normal
+   - Best for presentation and testing
+
+9. STOP MONITORING
+   - Click "Stop" button to pause simulation
+   - Session data is preserved
+   - Click "Start Monitoring" again to resume
+
+====================================================================
+TESTING ALL SCENARIOS
+====================================================================
+
+To demonstrate all features for your presentation:
+
+1. Set simulation mode to "Scripted"
+2. Start monitoring
+3. Watch the sequence unfold over about 2 minutes:
+   - Steps 0-4: Normal operation
+   - Steps 5-9: Kitchen socket overload (>13A)
+   - Steps 10-14: Warning state (10-13A)
+   - Steps 15-19: Whole house overload with recommendations
+   - Steps 20-24: Surge event on AC
+   - Steps 25-29: Invalid sensor reading on Microwave
+   - Steps 30+: Back to normal with variations
+
+4. Check all tabs:
+   - Appliance table for status colors
+   - Socket Groups panel for group status
+   - Alerts tab for warnings
+   - Recommendations tab for load shedding suggestions
+
+====================================================================
+MONITORED APPLIANCES
+====================================================================
+
+Kitchen Socket Groups:
+- Kitchen-1: Refrigerator (5A max), Microwave (10A max)
+- Kitchen-2: Electric Kettle (13A max), Blender (3A max)
+
+Living Room Socket Groups:
+- Living-1: TV (2A max), Decoder (1A max)
+- Living-2: Fan (1.5A max)
+
+Bedroom Socket Groups:
+- Bedroom-1: AC (12A max), Laptop Charger (1.5A max)
+- Bedroom-2: Phone Charger (0.5A max)
+
+Utility Socket Groups:
+- Utility-1: Washing Machine (10A max)
+- Utility-2: Iron (12A max)
+
+====================================================================
+SYSTEM RULES IMPLEMENTED
+====================================================================
+
+1. Socket Group Status:
+   - OK: Current ≤ 10A
+   - WARNING: 10A < Current ≤ 13A
+   - DANGER: Current > 13A
+
+2. Whole House Status:
+   - OK: Total Current ≤ 80% of Main Limit
+   - WARNING: 80% < Total Current ≤ 100% of Main Limit
+   - DANGER: Total Current > Main Limit
+
+3. Surge Detection:
+   - Triggered when current increase ≥ Surge Threshold
+   - Default: 3A sudden increase
+
+4. Invalid Readings:
+   - Current ≤ 0A
+   - Current > Maximum allowed for appliance
+   - Excluded from all calculations
+
+5. Load Shedding Priority:
+   - Non-essential appliances sorted by current (highest first)
+   - Essential appliances never recommended for shutdown
+   - Recommendations continue until total ≤ Main Limit
+
+6. Energy and Cost Calculation:
+   - Power (W) = Voltage × Current
+   - Energy (kWh) = Power × Time
+   - Cost (GHS) = Energy × Tariff
+
+====================================================================
+TROUBLESHOOTING
+====================================================================
+
+ERROR: "JavaFX runtime components are missing"
+SOLUTION: 
+- Verify JavaFX SDK is downloaded and extracted
+- Check JAVAFX_PATH in scripts points to lib folder
+- Ensure lib folder contains .jar files
+
+ERROR: "javac is not recognized"
+SOLUTION:
+- Install JDK 21 (not just JRE)
+- Add JDK bin folder to system PATH
+- Restart command prompt/terminal
+
+ERROR: "Class not found"
+SOLUTION:
+- Ensure compilation was successful
+- Check 'out' folder contains .class files
+- Run from project root directory
+
+ERROR: Application window is blank
+SOLUTION:
+- Check Java console for errors
+- Verify all files compiled successfully
+- Try switching simulation mode in Settings
+
+====================================================================
+PROJECT STRUCTURE
+====================================================================
+
+SmartHomeLoadMonitor/
+├── README.md                    (Detailed documentation)
+├── compile.bat                  (Windows compile script)
+├── run.bat                      (Windows run script)
+├── compile.sh                   (Linux/Mac compile script)
+├── run.sh                       (Linux/Mac run script)
+├── QUICK_START.txt              (This file)
+└── src/main/java/com/smarthome/
+    ├── SmartHomeLoadMonitor.java       (Main application)
+    ├── model/
+    │   ├── Appliance.java              (Appliance data model)
+    │   ├── Alert.java                  (Alert system)
+    │   └── Settings.java               (Configuration)
+    ├── controller/
+    │   ├── MonitoringSystem.java       (Core logic)
+    │   └── Simulator.java              (Simulation engine)
+    └── view/
+        └── SettingsDialog.java         (Settings window)
+
+====================================================================
+PRESENTATION TIPS
+====================================================================
+
+1. Start with Scripted Mode for consistent demonstration
+2. Explain the Ghanaian context (230V, 13A sockets)
+3. Show all status colors (OK, WARNING, DANGER, SURGE, INVALID)
+4. Demonstrate load shedding recommendations
+5. Highlight real-world applications:
+   - Preventing breaker trips
+   - Managing inverter loads during power outages
+   - Reducing electricity bills
+   - Protecting expensive appliances
+
+6. Key features to emphasize:
+   - Real-time monitoring (2-second updates)
+   - Socket group protection (13A limit)
+   - Whole house monitoring (customizable limit)
+   - Surge detection
+   - Fault tolerance (invalid readings handled)
+   - Cost tracking
+   - Smart recommendations (priority-based)
+
+====================================================================
+CONTACT & SUPPORT
+====================================================================
+
+For issues during development:
+1. Check this guide first
+2. Review README.md for detailed information
+3. Verify Java and JavaFX installation
+4. Test with both simulation modes
+
+Good luck with your presentation!
+
+====================================================================

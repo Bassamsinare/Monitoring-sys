@@ -1,0 +1,447 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║   COMPLETE STEP-BY-STEP GUIDE - FROM ZERO TO RUNNING APPLICATION            ║
+║   Smart Home Load Monitor - For IntelliJ IDEA Users                         ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+📌 WHAT YOU'LL DO:
+1. Install Java 21 on your PC
+2. Download and extract JavaFX SDK
+3. Download and install IntelliJ IDEA
+4. Open the project in IntelliJ
+5. Configure JavaFX library
+6. Set up run configuration
+7. Run the application!
+
+⏱️ Total Time: 20-30 minutes
+
+══════════════════════════════════════════════════════════════════════════════
+
+STEP 1: INSTALL JAVA 21 ON YOUR PC
+══════════════════════════════════════════════════════════════════════════════
+
+🔍 First, check if you already have Java:
+
+1. Press Windows Key + R
+2. Type: cmd
+3. Press Enter
+4. In the black window (Command Prompt), type:
+   java -version
+5. Press Enter
+
+✅ If you see "version 21" or higher → Skip to STEP 2
+❌ If you see "not recognized" or older version → Continue below
+
+───────────────────────────────────────────────────────────────────────────────
+
+📥 Download Java 21:
+
+1. Open your web browser
+2. Go to: https://adoptium.net/temurin/releases/
+3. Select:
+   - Operating System: Windows
+   - Version: 21 - LTS
+   - Architecture: x64 (if you have 64-bit Windows - most modern PCs)
+4. Click the BIG BLUE ".msi" button to download
+5. Wait for download to complete (about 150-200 MB)
+
+───────────────────────────────────────────────────────────────────────────────
+
+🔧 Install Java 21:
+
+1. Go to your Downloads folder
+2. Double-click the file: OpenJDK21U-jdk_x64_windows_hotspot_21.x.x.msi
+3. Click "Next" on welcome screen
+4. ✅ IMPORTANT: Check the box that says "Add to PATH"
+5. Click "Next" → "Next" → "Install"
+6. Click "Yes" if Windows asks for permission
+7. Wait for installation (1-2 minutes)
+8. Click "Finish"
+
+───────────────────────────────────────────────────────────────────────────────
+
+✔️ Verify Java Installation:
+
+1. Press Windows Key + R
+2. Type: cmd
+3. Press Enter
+4. Type: java -version
+5. Press Enter
+6. You should see something like:
+   openjdk version "21.0.x"
+
+✅ If you see this → Great! Move to STEP 2
+❌ If not → Restart your computer and try again
+
+══════════════════════════════════════════════════════════════════════════════
+
+STEP 2: DOWNLOAD AND EXTRACT JAVAFX SDK 21
+══════════════════════════════════════════════════════════════════════════════
+
+📥 Download JavaFX:
+
+1. Open your web browser
+2. Go to: https://gluonhq.com/products/javafx/
+3. Scroll down to "JavaFX 21 Downloads"
+4. Click on "SDK" under the Downloads section
+5. Select: Windows → SDK (not jmods)
+6. Download: openjfx-21.x.x_windows-x64_bin-sdk.zip
+7. Wait for download (about 50 MB)
+
+───────────────────────────────────────────────────────────────────────────────
+
+📂 Extract JavaFX to C Drive:
+
+1. Go to your Downloads folder
+2. Find: openjfx-21.x.x_windows-x64_bin-sdk.zip
+3. Right-click on it → "Extract All..."
+4. Change the destination to: C:\
+5. Click "Extract"
+6. You should now have a folder: C:\javafx-sdk-21.x.x
+
+───────────────────────────────────────────────────────────────────────────────
+
+📝 Note the Exact Path:
+
+🚨 VERY IMPORTANT: Write down this path exactly:
+   C:\javafx-sdk-21.0.5\lib
+   (Your version number might be slightly different - check your folder name!)
+
+You'll need this path later!
+
+══════════════════════════════════════════════════════════════════════════════
+
+STEP 3: DOWNLOAD AND INSTALL INTELLIJ IDEA
+══════════════════════════════════════════════════════════════════════════════
+
+📥 Download IntelliJ IDEA:
+
+1. Open your web browser
+2. Go to: https://www.jetbrains.com/idea/download/
+3. Scroll down to "IntelliJ IDEA Community Edition"
+4. Click "Download" (the FREE version)
+5. Wait for download (about 700 MB)
+
+───────────────────────────────────────────────────────────────────────────────
+
+🔧 Install IntelliJ IDEA:
+
+1. Go to your Downloads folder
+2. Double-click: ideaIC-2024.x.x.exe
+3. Click "Next"
+4. Choose installation location (default is fine) → "Next"
+5. ✅ Check these boxes:
+   - Create Desktop Shortcut
+   - Update PATH variable
+   - Add "Open Folder as Project"
+   - .java association
+6. Click "Next" → "Install"
+7. Wait for installation (3-5 minutes)
+8. ✅ Check "Run IntelliJ IDEA Community Edition"
+9. Click "Finish"
+
+───────────────────────────────────────────────────────────────────────────────
+
+🎨 First Time Setup (IntelliJ will open):
+
+1. Accept the User Agreement
+2. Choose theme: "Darcula" (dark) or "IntelliJ Light" (light) - your choice!
+3. Click "Start using IntelliJ IDEA"
+
+══════════════════════════════════════════════════════════════════════════════
+
+STEP 4: EXTRACT AND OPEN YOUR PROJECT
+══════════════════════════════════════════════════════════════════════════════
+
+📂 Extract Your Project:
+
+You should have downloaded a ZIP file called "SmartHomeLoadMonitor"
+
+1. Find the ZIP file in your Downloads folder
+2. Right-click on it → "Extract All..."
+3. Extract to: C:\Users\YourName\Desktop\SmartHomeLoadMonitor
+   (Or anywhere you prefer - just remember where!)
+4. Click "Extract"
+
+───────────────────────────────────────────────────────────────────────────────
+
+🚀 Open Project in IntelliJ:
+
+1. In IntelliJ IDEA, click "Open"
+   (If you closed IntelliJ, open it from Desktop shortcut)
+2. Navigate to where you extracted the project
+3. Select the "SmartHomeLoadMonitor" FOLDER (not a file inside it)
+4. Click "OK"
+5. If asked "Trust Project?", click "Trust Project"
+6. Wait for IntelliJ to index the project (progress bar at bottom)
+   This takes 1-2 minutes - BE PATIENT!
+
+───────────────────────────────────────────────────────────────────────────────
+
+✅ Check Project Structure:
+
+On the left side, you should see:
+SmartHomeLoadMonitor
+  ├── .idea
+  ├── src
+  │   └── main
+  │       └── java
+  │           └── com
+  │               └── smarthome
+  │                   ├── SmartHomeLoadMonitor.java
+  │                   ├── controller
+  │                   ├── model
+  │                   └── view
+  └── SmartHomeLoadMonitor.iml
+
+If you see this → Perfect! Continue to STEP 5
+If you don't see this → Ask for help!
+
+══════════════════════════════════════════════════════════════════════════════
+
+STEP 5: ADD JAVAFX LIBRARY TO PROJECT
+══════════════════════════════════════════════════════════════════════════════
+
+🔧 Open Project Structure:
+
+1. In IntelliJ, click "File" at the top
+2. Click "Project Structure..." (near the bottom)
+   OR press: Ctrl + Alt + Shift + S
+3. A new window opens
+
+───────────────────────────────────────────────────────────────────────────────
+
+📚 Add JavaFX Library:
+
+1. In the left sidebar, click "Libraries"
+2. Click the "+" button (top left of the window)
+3. Select "Java"
+4. A file browser opens
+5. Navigate to: C:\javafx-sdk-21.0.5\lib
+   (Use the path you wrote down earlier!)
+6. Click on the "lib" folder to select it
+7. Click "OK"
+8. A dialog appears asking "Add to Modules"
+9. Make sure "SmartHomeLoadMonitor" is checked
+10. Click "OK"
+11. You should now see "lib" in the Libraries list
+12. Click "Apply" (bottom right)
+13. Click "OK"
+
+✅ Verification: You should see "lib" listed under Libraries
+
+══════════════════════════════════════════════════════════════════════════════
+
+STEP 6: CONFIGURE RUN SETTINGS
+══════════════════════════════════════════════════════════════════════════════
+
+🎯 Create Run Configuration:
+
+1. In IntelliJ, click "Run" at the top menu
+2. Click "Edit Configurations..."
+3. Click the "+" button (top left)
+4. Select "Application"
+5. A form appears on the right
+
+───────────────────────────────────────────────────────────────────────────────
+
+📝 Fill in the Form:
+
+1. Name: Type "SmartHomeLoadMonitor"
+
+2. Main class: 
+   - Click the "..." button (three dots)
+   - A search window opens
+   - Type: SmartHomeLoadMonitor
+   - Select: com.smarthome.SmartHomeLoadMonitor
+   - Click "OK"
+
+3. VM options:
+   - Click "Modify options" (under the Name field)
+   - Check "Add VM options"
+   - A new field appears: "VM options"
+   - In this field, type EXACTLY (use YOUR path from Step 2):
+   
+   --module-path "C:\javafx-sdk-21.0.5\lib" --add-modules javafx.controls,javafx.fxml
+   
+   🚨 CRITICAL: Replace C:\javafx-sdk-21.0.5\lib with YOUR actual path!
+   
+   Example if your version is 21.0.3:
+   --module-path "C:\javafx-sdk-21.0.3\lib" --add-modules javafx.controls,javafx.fxml
+
+4. Click "Apply"
+5. Click "OK"
+
+───────────────────────────────────────────────────────────────────────────────
+
+✅ Verification:
+
+At the top of IntelliJ, next to the Run button (green play icon), you should 
+now see a dropdown that says "SmartHomeLoadMonitor"
+
+══════════════════════════════════════════════════════════════════════════════
+
+STEP 7: RUN THE APPLICATION! 🎉
+══════════════════════════════════════════════════════════════════════════════
+
+🚀 First Run:
+
+1. Click the green "Run" button (play icon) at the top right
+   OR press: Shift + F10
+2. Wait 5-10 seconds (first run takes longer)
+3. The application window should open!
+
+───────────────────────────────────────────────────────────────────────────────
+
+✅ Success! You should see:
+
+- A window titled "Smart Home Load Monitor - Ghana Edition"
+- A table with appliances (Refrigerator, Microwave, TV, etc.)
+- Right panel with "House Summary" and "Socket Groups"
+- Bottom tabs: "Alerts" and "Load Shedding Recommendations"
+- Top toolbar with Start, Stop, Settings buttons
+
+───────────────────────────────────────────────────────────────────────────────
+
+🎮 Test It:
+
+1. Click "⚙ Settings" button
+2. Change "Simulation Mode" to "SCRIPTED"
+3. Click "Save"
+4. Click "▶ Start Monitoring"
+5. Watch the magic! All scenarios will play automatically!
+
+══════════════════════════════════════════════════════════════════════════════
+
+TROUBLESHOOTING GUIDE
+══════════════════════════════════════════════════════════════════════════════
+
+❌ ERROR: "Module javafx.controls not found"
+───────────────────────────────────────────────────────────────────────────────
+CAUSE: VM options path is wrong
+FIX:
+1. Run → Edit Configurations
+2. Check the VM options field
+3. Make sure the path matches your JavaFX location EXACTLY
+4. Common mistakes:
+   - Using forward slashes / instead of backslashes \
+   - Wrong version number
+   - Missing \lib at the end
+   - Typos in the path
+
+───────────────────────────────────────────────────────────────────────────────
+
+❌ ERROR: "Cannot find main class"
+───────────────────────────────────────────────────────────────────────────────
+CAUSE: Source folder not marked correctly
+FIX:
+1. In Project Explorer (left side), find "src/main/java"
+2. Right-click on the "java" folder
+3. Select "Mark Directory as" → "Sources Root"
+4. Try running again
+
+───────────────────────────────────────────────────────────────────────────────
+
+❌ ERROR: Red underlines all over the code
+───────────────────────────────────────────────────────────────────────────────
+CAUSE: IntelliJ still indexing or JavaFX not found
+FIX:
+1. Wait for indexing to complete (progress bar at bottom)
+2. File → Invalidate Caches → "Invalidate and Restart"
+3. After restart, check if JavaFX library is added (Step 5)
+
+───────────────────────────────────────────────────────────────────────────────
+
+❌ Application window appears but is blank/frozen
+───────────────────────────────────────────────────────────────────────────────
+CAUSE: JavaFX initialization issue
+FIX:
+1. Close the application
+2. Run → Edit Configurations
+3. In VM options, add at the beginning:
+   -Djavafx.verbose=true
+4. Run again and check console output for errors
+
+───────────────────────────────────────────────────────────────────────────────
+
+❌ Nothing happens when clicking Run button
+───────────────────────────────────────────────────────────────────────────────
+CAUSE: No run configuration selected
+FIX:
+1. Check the dropdown next to the Run button
+2. Should say "SmartHomeLoadMonitor"
+3. If empty, repeat Step 6
+
+══════════════════════════════════════════════════════════════════════════════
+
+QUICK REFERENCE CARD
+══════════════════════════════════════════════════════════════════════════════
+
+🔑 Important Paths (Write These Down):
+
+Java Installation:     C:\Program Files\Eclipse Adoptium\jdk-21.x.x
+JavaFX SDK:           C:\javafx-sdk-21.0.x\lib
+Project Location:     C:\Users\YourName\Desktop\SmartHomeLoadMonitor
+
+───────────────────────────────────────────────────────────────────────────────
+
+⌨️ Important Shortcuts in IntelliJ:
+
+Shift + F10          - Run application
+Ctrl + Alt + Shift + S  - Project Structure
+Shift + F9           - Debug application
+Ctrl + Space         - Code completion
+Alt + Enter          - Quick fix
+
+───────────────────────────────────────────────────────────────────────────────
+
+🎯 VM Options Template (Copy This):
+
+--module-path "C:\javafx-sdk-21.0.5\lib" --add-modules javafx.controls,javafx.fxml
+
+Remember to change the version number to match YOUR JavaFX version!
+
+══════════════════════════════════════════════════════════════════════════════
+
+WHAT TO DO TONIGHT BEFORE PRESENTATION
+══════════════════════════════════════════════════════════════════════════════
+
+✅ Checklist:
+
+□ Complete Steps 1-7 above
+□ Application runs successfully
+□ Test Scripted mode (Settings → SCRIPTED → Start)
+□ Watch all scenarios play once
+□ Practice explaining what's happening
+□ Take screenshots if needed for report
+□ Close IntelliJ (saves everything)
+
+══════════════════════════════════════════════════════════════════════════════
+
+TOMORROW - PRESENTATION DAY
+══════════════════════════════════════════════════════════════════════════════
+
+📋 Quick Start Procedure:
+
+1. Open IntelliJ IDEA (Desktop shortcut)
+2. Recent Projects will show "SmartHomeLoadMonitor" → Click it
+3. Click the Run button (green play icon)
+4. Application opens
+5. Settings → SCRIPTED mode → Start
+6. Narrate as scenarios appear!
+
+══════════════════════════════════════════════════════════════════════════════
+
+🎓 YOU'RE READY!
+══════════════════════════════════════════════════════════════════════════════
+
+If you've reached this point and the application is running:
+🎉 CONGRATULATIONS! You're 100% ready for tomorrow's presentation!
+
+The application will automatically demonstrate all scenarios in Scripted mode.
+Just click Start and explain what's happening as it runs.
+
+Good luck! You've got this! 💪🚀
+
+══════════════════════════════════════════════════════════════════════════════
